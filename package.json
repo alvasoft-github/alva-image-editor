@@ -1,13 +1,13 @@
 {
-  "name": "@alvasoft/image-editor",
+  "name": "@alvasoft/alva-image-editor",
   "author": "Alvasoft",
   "version": "5.4.12",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/northrange/tui-image-editor.git"
+    "url": "https://github.com/alvasoft-github/alva-image-editor.git"
   },
-  "main": "dist/@northrange/tui-image-editor.js",
+  "main": "dist/@alvasoft/alva-image-editor.js",
   "files": [
     "src",
     "dist",
@@ -27,8 +27,7 @@
     "test:ne": "KARMA_SERVER=ne karma start",
     "test:ex": "node exampleTest.js",
     "test:types": "tsc --project test/types",
-    "bundle": "webpack && webpack -p && npm run bundle:svg",
-    "bundle:svg": "node makesvg.js",
+    "bundle": "webpack && webpack -p",
     "serve": "webpack-dev-server",
     "doc:dev": "tuidoc --dev",
     "doc": "tuidoc",
@@ -39,7 +38,7 @@
   },
   "dependencies": {
     "core-js-pure": "^3.6.4",
-    "fabric": "^4.4.0",
+    "fabric": "^3.6.6",
     "tui-code-snippet": "^1.5.0",
     "tui-color-picker": "^2.2.0"
   },
