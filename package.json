@@ -1,6 +1,6 @@
 {
-  "name": "@northrange/tui-image-editor",
-  "author": "northrange IT solutions",
+  "name": "@alvasoft/image-editor",
+  "author": "Alvasoft",
   "version": "5.4.12",
   "license": "MIT",
   "repository": {
@@ -16,7 +16,6 @@
   "description": "Fork of TUI ImageEditor",
   "keywords": [
     "northrange",
-    "tui",
     "component",
     "image",
     "editor",
