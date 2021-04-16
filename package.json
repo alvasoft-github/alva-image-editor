@@ -23,6 +23,27 @@
     "canvas",
     "fabric"
   ],
+  "scripts": {
+    "test": "karma start",
+    "test:ne": "KARMA_SERVER=ne karma start",
+    "test:ex": "node exampleTest.js",
+    "test:types": "tsc --project test/types",
+    "bundle": "webpack && webpack -p && npm run bundle:svg",
+    "bundle:svg": "node makesvg.js",
+    "serve": "webpack-dev-server",
+    "doc:dev": "tuidoc --dev",
+    "doc": "tuidoc",
+    "tslint": "tslint index.d.ts",
+    "preversion": "npm run test",
+    "version": "npm run bundle",
+    "postversion": "git push all && git push all --tags"
+  },
+  "dependencies": {
+    "core-js-pure": "^3.6.4",
+    "fabric": "^4.4.0",
+    "tui-code-snippet": "^1.5.0",
+    "tui-color-picker": "^2.2.0"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
@@ -71,26 +92,5 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1"
-  },
-  "scripts": {
-    "test": "karma start",
-    "test:ne": "KARMA_SERVER=ne karma start",
-    "test:ex": "node exampleTest.js",
-    "test:types": "tsc --project test/types",
-    "bundle": "webpack && webpack -p && npm run bundle:svg",
-    "bundle:svg": "node makesvg.js",
-    "serve": "webpack-dev-server",
-    "doc:dev": "tuidoc --dev",
-    "doc": "tuidoc",
-    "tslint": "tslint index.d.ts",
-    "preversion": "npm run test",
-    "version": "npm run bundle",
-    "postversion": "git push all && git push all --tags"
-  },
-  "dependencies": {
-    "core-js-pure": "^3.6.4",
-    "fabric": "3.6.3",
-    "tui-code-snippet": "^1.5.0",
-    "tui-color-picker": "^2.2.0"
   }
 }
