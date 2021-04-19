@@ -640,9 +640,10 @@ class Graphics {
      * always within the boundaries of the current cropzone rect).
      * @param {number} [aspectRatio] cropzone rect aspect ratio
      * @param {boolean} [fixAspect] - whether or not to fix the aspect ratio
+     * @param {number} [initialSizeInPercent] - the size of the cropzone in percentage of the original image
      */
-    updateCropzoneRect(aspectRatio, fixAspect) {
-        this.getComponent(components.CROPPER).updateCropzoneRect(aspectRatio, fixAspect);
+    updateCropzoneRect(aspectRatio, fixAspect, initialSizeInPercent) {
+        this.getComponent(components.CROPPER).updateCropzoneRect(aspectRatio, fixAspect, initialSizeInPercent);
     }
 
     /**

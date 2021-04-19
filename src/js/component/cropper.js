@@ -342,10 +342,11 @@ class Cropper extends Component {
      * Update the current cropzone rect, taking the given preset ratio as the basis for the cropzone rect.
      * @param {number} [aspectRatio] - aspect ratio to use for the new cropzone rect
      * @param {boolean} [fixAspect] - whether or not to fix the aspect ratio
+     * @param {number} [initialSizeInPercent] - the size of the cropzone in percentage of the original image
      */
-    updateCropzoneRect(aspectRatio, fixAspect) {
+    updateCropzoneRect(aspectRatio, fixAspect, initialSizeInPercent) {
         if (!this._isCropzoneSet()) {
-            this.setCropzoneRect(aspectRatio || 1, fixAspect);
+            this.setCropzoneRect(aspectRatio || 1, fixAspect, initialSizeInPercent);
         } else {
             this._renderCropzoneRect(aspectRatio, fixAspect, ar => this._updateCurrentCropzoneRect(ar, fixAspect));
         }
