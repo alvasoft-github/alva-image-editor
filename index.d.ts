@@ -329,7 +329,7 @@ export declare class ImageEditor {
     public setAngle(angle: number, isSilent?: boolean): Promise<number>;
     public setBrush(option: IBrushOptions): void;
     public setCropzoneRect(mode?: number, fixAspect?: boolean, sizeInPercent?: number): void;
-    public updateCropzoneRect(aspectRatio?: number, fixAspect?: boolean): void;
+    public updateCropzoneRect(aspectRatio?: number, fixAspect?: boolean, initialSizeInPercent?: number): void;
     public setDrawingShape(type: string, options?: IShapeOptions): void;
     public setObjectPosition(id: number, posInfo?: IPositionConfig): Promise<void>;
     public setObjectProperties(id: number, keyValue?: IGraphicObjectProps): Promise<void>;
