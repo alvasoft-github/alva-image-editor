@@ -34,7 +34,9 @@
     "tslint": "tslint index.d.ts",
     "preversion": "npm run test",
     "version": "npm run bundle",
-    "postversion": "git push all && git push all --tags"
+    "postversion": "git push all && git push all --tags",
+    "new-version:minor": "npm version minor",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "core-js-pure": "^3.6.4",
