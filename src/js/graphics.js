@@ -477,6 +477,28 @@ class Graphics {
     }
 
     /**
+     * To Blob of the canvas
+     * @param {Object} options - options for toBlob
+     *   @param {Number} [options.multiplier=1] Multiplier to scale by
+     *   @param {Number} [options.left] Cropping left offset.
+     *   @param {Number} [options.top] Cropping top offset.
+     *   @param {Number} [options.width] Cropping width.
+     *   @param {Number} [options.height] Cropping height
+     * @returns {Promise} A promise holding the Blob object of the image.
+     */
+    toBlob(options) {
+        return new Promise(resolve => {
+            if (!this._canvas) {
+                resolve(null);
+            }
+
+            const multiplier = (options && options.multiplier) || 1;
+            const newCroppedCanvas = this._canvas.toCanvasElement(multiplier, options);
+            newCroppedCanvas.toBlob(blob => resolve(blob));
+        });
+    }
+
+    /**
      * Save image(background) of canvas
      * @param {string} name - Name of image
      * @param {?fabric.Image} canvasImage - Fabric image instance

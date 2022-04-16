@@ -1402,8 +1402,22 @@ class ImageEditor {
         return this._graphics.toDataURL(options);
     }
 
+    /**
+     * Get the Blob of the canvas
+     * @param {Object} options - options for toBlob
+     *   @param {Number} [options.multiplier=1] Multiplier to scale by
+     *   @param {Number} [options.left] Cropping left offset.
+     *   @param {Number} [options.top] Cropping top offset.
+     *   @param {Number} [options.width] Cropping width.
+     *   @param {Number} [options.height] Cropping height
+     * @returns {Promise} A promise holding the Blob object of the image.
+     */
+    toBlob(options) {
+        return this._graphics.toBlob(options);
+    }
+
     toPreview(aspectRatio, width) {
-        this.startDrawingMode('CROPPER');
+        this.startDrawingMode(components.CROPPER);
         this.setCropzoneRect(aspectRatio, false, 1);
 
         const cropzoneRect = this.getCropzoneRect();
@@ -1411,7 +1425,7 @@ class ImageEditor {
         const multiplier = Math.max(width / cropzoneRect.width, height / cropzoneRect.height);
         this.stopDrawingMode();
 
-        return this.toDataURL(Object.assign({}, cropzoneRect, {multiplier}));
+        return this.toBlob(Object.assign({}, cropzoneRect, {multiplier}));
     }
 
     /**
