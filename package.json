@@ -1,7 +1,7 @@
 {
   "name": "@alvasoft/alva-image-editor",
   "author": "Alvasoft",
-  "version": "5.6.1",
+  "version": "5.6.2",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "fabric"
   ],
   "scripts": {
-    "test": "set NODE_OPTIONS=\"--openssl-legacy-provider\" && karma start",
+    "test": "karma start",
     "test:ne": "KARMA_SERVER=ne karma start",
     "test:ex": "node exampleTest.js",
     "test:types": "tsc --project test/types",
