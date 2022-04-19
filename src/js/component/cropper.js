@@ -282,7 +282,7 @@ class Cropper extends Component {
      *  @param {Number} cropRect.top top position
      *  @param {Number} cropRect.width width
      *  @param {Number} cropRect.height height
-     * @returns {?{imageName: string, url: string}} cropped Image data
+     * @returns {Promise<{imageName: string, blob: Blob}>} cropped Image data
      */
     getCroppedImageData(cropRect) {
         const canvas = this.getCanvas();
@@ -295,16 +295,18 @@ class Cropper extends Component {
             canvas.remove(this._cropzone);
         }
 
-        const imageData = {
-            imageName: this.getImageName(),
-            url: canvas.toDataURL(cropRect)
-        };
+        return this.graphics.toBlob(cropRect).then(blob => {
+            const imageData = {
+                imageName: this.getImageName(),
+                blob
+            };
 
-        if (containsCropzone) {
-            canvas.add(this._cropzone);
-        }
+            if (containsCropzone) {
+                canvas.add(this._cropzone);
+            }
 
-        return imageData;
+            return imageData;
+        });
     }
 
     /**

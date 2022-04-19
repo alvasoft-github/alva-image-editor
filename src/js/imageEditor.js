@@ -686,13 +686,19 @@ class ImageEditor {
      * imageEditor.crop(imageEditor.getCropzoneRect());
      */
     crop(rect) {
-        const data = this._graphics.getCroppedImageData(rect);
+        return this._graphics.getCroppedImageData(rect).then(data => {
+            if (!data) {
+                throw new Error(rejectMessages.invalidParameters);
+            }
 
-        if (!data) {
-            return Promise.reject(rejectMessages.invalidParameters);
-        }
+            return this.loadImageFromFile(data.blob, data.imageName, this._isSilentCommand(commands.CROP_IMAGE));
+        });
 
-        return this.loadImageFromURL(data.url, data.imageName, this._isSilentCommand(commands.CROP_IMAGE));
+        // if (!data) {
+        //     return Promise.reject(rejectMessages.invalidParameters);
+        // }
+
+        // return this.loadImageFromFile(data.blob, data.imageName, this._isSilentCommand(commands.CROP_IMAGE));
     }
 
     /**

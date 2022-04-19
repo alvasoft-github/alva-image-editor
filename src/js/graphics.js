@@ -179,6 +179,7 @@ class Graphics {
         const {wrapperEl} = this._canvas;
 
         this._canvas.clear();
+        this._canvas.displose();
 
         wrapperEl.parentNode.removeChild(wrapperEl);
     }
@@ -675,7 +676,7 @@ class Graphics {
      *  @param {Number} cropRect.top top position
      *  @param {Number} cropRect.width width
      *  @param {Number} cropRect.height height
-     * @returns {?{imageName: string, url: string}} cropped Image data
+     * @returns {Promise<{imageName: string, blob: Blob}>} cropped Image data
      */
     getCroppedImageData(cropRect) {
         return this.getComponent(components.CROPPER).getCroppedImageData(cropRect);
