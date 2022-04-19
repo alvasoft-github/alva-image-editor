@@ -125,14 +125,18 @@ describe('Graphics', () => {
     it('can get the cropped image data', () => {
         graphics.startDrawingMode(drawingModes.CROPPER);
         spyOn(graphics.getComponent(components.CROPPER)._cropzone, 'isValid').and.returnValue(true);
+        spyOn(graphics, 'toBlob').and.returnValue(Promise.resolve(new Blob()));
 
         expect(graphics.getCropzoneRect()).toBeTruthy();
-        expect(graphics.getCroppedImageData(graphics.getCropzoneRect())).toEqual({
-            imageName: jasmine.any(String),
-            url: jasmine.any(String)
-        });
 
-        graphics.stopDrawingMode();
+        graphics.getCroppedImageData(graphics.getCropzoneRect()).then(result => {
+            expect(result).toEqual({
+                imageName: jasmine.any(String),
+                blob: jasmine.any(Blob)
+            });
+
+            graphics.stopDrawingMode(); 
+        });
     });
 
     it('Cropzone must be hidden initially and then redisplayed after completion at toDataURL is executed with a cropzone present', () => {

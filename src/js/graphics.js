@@ -177,11 +177,10 @@ class Graphics {
      */
     destroy() {
         const {wrapperEl} = this._canvas;
+        wrapperEl.parentNode.removeChild(wrapperEl);
 
         this._canvas.clear();
-        this._canvas.displose();
-
-        wrapperEl.parentNode.removeChild(wrapperEl);
+        this._canvas.dispose();
     }
 
     /**

@@ -15,7 +15,7 @@
   ],
   "description": "Fork of TUI ImageEditor",
   "keywords": [
-    "northrange",
+    "alvasoft",
     "component",
     "image",
     "editor",
@@ -23,7 +23,7 @@
     "fabric"
   ],
   "scripts": {
-    "test": "karma start",
+    "test": "set NODE_OPTIONS=\"--openssl-legacy-provider\" && karma start",
     "test:ne": "KARMA_SERVER=ne karma start",
     "test:ex": "node exampleTest.js",
     "test:types": "tsc --project test/types",
