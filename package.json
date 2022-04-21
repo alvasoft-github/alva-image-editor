@@ -35,8 +35,7 @@
     "preversion": "npm run test",
     "version": "npm run bundle",
     "postversion": "git push all && git push all --tags",
-    "new-version:minor": "npm version minor",
-    "publish": "npm publish"
+    "new-version:minor": "npm version minor"
   },
   "dependencies": {
     "core-js-pure": "^3.6.4",

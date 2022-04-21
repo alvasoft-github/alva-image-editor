@@ -569,6 +569,7 @@ class ImageEditor {
      * Load image from file
      * @param {File} imgFile - Image file
      * @param {string} [imageName] - imageName
+     * @param {boolean} silent - true, if the operation can be undone; false otherwise.
      * @returns {Promise<SizeChange, ErrorMsg>}
      * @example
      * imageEditor.loadImageFromFile(file).then(result => {
@@ -576,7 +577,7 @@ class ImageEditor {
      *      console.log('new : ' + result.newWidth + ', ' + result.newHeight);
      * });
      */
-    loadImageFromFile(imgFile, imageName) {
+    loadImageFromFile(imgFile, imageName, silent = true) {
         if (!imgFile) {
             return Promise.reject(rejectMessages.invalidParameters);
         }
@@ -584,7 +585,7 @@ class ImageEditor {
         const imgUrl = URL.createObjectURL(imgFile);
         imageName = imageName || imgFile.name;
 
-        return this.loadImageFromURL(imgUrl, imageName).then(value => {
+        return this.loadImageFromURL(imgUrl, imageName, silent).then(value => {
             URL.revokeObjectURL(imgFile);
 
             return value;

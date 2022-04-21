@@ -1026,10 +1026,10 @@ $inputRangeColorFilterValue.on('change', function() {
 // Etc..
 
 // Load sample image
-imageEditor.loadImageFromURL('img/sampleImage3.jpg', 'SampleImage').then(function(sizeValue) {
-    console.log(sizeValue);
-    imageEditor.clearUndoStack();
-});
+// imageEditor.loadImageFromURL('data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==', 'SampleImage').then(function(sizeValue) {
+//     console.log(sizeValue);
+//     imageEditor.clearUndoStack();
+// });
 
 
 // IE9 Unselectable
