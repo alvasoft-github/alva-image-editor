@@ -133,15 +133,12 @@ export declare interface IShadowOptions {
     affectStroke?: boolean;
 }
 
-export declare interface IToBlobOptions {
+export declare interface IExportOptions {
     multiplier?: number;
     left?: number;
     top?: number;
     width?: number;
     height?: number;
-}
-
-export declare interface IToDataURLOptions extends IToBlobOptions {
     format?: string;
     quality?: number;
 }
@@ -339,8 +336,8 @@ export declare class ImageEditor {
     public setObjectPropertiesQuietly(id: number, keyValue?: IGraphicObjectProps): Promise<void>;
     public startDrawingMode(mode: string, option?: {width?: number, color?: string}): boolean;
     public stopDrawingMode(): void;
-    public toDataURL(options?: IToDataURLOptions): string;
-    public toBlob(options?: IToBlobOptions): Promise<Blob>;
+    public toDataURL(options?: IExportOptions): string;
+    public toBlob(options?: IExportOptions): Promise<Blob>;
     public toPreview(aspectRatio: number, width: number): Promise<Blob>;
     public undo(): Promise<any>;
     public preventObjectDeletion(prevent: boolean): void;
