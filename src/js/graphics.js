@@ -479,6 +479,8 @@ class Graphics {
     /**
      * To Blob of the canvas
      * @param {Object} options - options for toBlob
+     *   @param {String} [options.format=png] The format of the output image. Either "jpeg" or "png"
+     *   @param {Number} [options.quality=1] Quality level (0..1). Only used for jpeg.
      *   @param {Number} [options.multiplier=1] Multiplier to scale by
      *   @param {Number} [options.left] Cropping left offset.
      *   @param {Number} [options.top] Cropping top offset.
@@ -492,9 +494,11 @@ class Graphics {
                 resolve(null);
             }
 
+            const format = (options && options.format) || 'png';
+            const quality = (options && options.quality) || 1;
             const multiplier = (options && options.multiplier) || 1;
             const newCroppedCanvas = this._canvas.toCanvasElement(multiplier, options);
-            newCroppedCanvas.toBlob(blob => resolve(blob));
+            newCroppedCanvas.toBlob(blob => resolve(blob), format, quality);
         });
     }
 
