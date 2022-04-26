@@ -596,6 +596,8 @@ class ImageEditor {
      * Load image from url
      * @param {string} url - File url
      * @param {string} imageName - imageName
+     * @param {Object} options - image options rect
+     *  @param {String} options.crossOrigin - Cross-origin value used to load the image, can be "anonymous" or "use-credentials"
      * @param {boolean} silent - true, if the operation can be undone; false otherwise.
      * @returns {Promise<SizeChange, ErrorMsg>}
      * @example
@@ -604,14 +606,14 @@ class ImageEditor {
      *      console.log('new : ' + result.newWidth + ', ' + result.newHeight);
      * });
      */
-    loadImageFromURL(url, imageName, silent = true) {
+    loadImageFromURL(url, imageName, options = null, silent = true) {
         if (!imageName || !url) {
             return Promise.reject(rejectMessages.invalidParameters);
         }
 
         return silent && this._isSilentCommand(commands.LOAD_IMAGE)
-            ? this.executeSilent(commands.LOAD_IMAGE, imageName, url)
-            : this.execute(commands.LOAD_IMAGE, imageName, url);
+            ? this.executeSilent(commands.LOAD_IMAGE, imageName, url, options)
+            : this.execute(commands.LOAD_IMAGE, imageName, url, options);
     }
 
     /**
@@ -694,12 +696,6 @@ class ImageEditor {
 
             return this.loadImageFromFile(data.blob, data.imageName, this._isSilentCommand(commands.CROP_IMAGE));
         });
-
-        // if (!data) {
-        //     return Promise.reject(rejectMessages.invalidParameters);
-        // }
-
-        // return this.loadImageFromFile(data.blob, data.imageName, this._isSilentCommand(commands.CROP_IMAGE));
     }
 
     /**

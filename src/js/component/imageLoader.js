@@ -27,9 +27,11 @@ class ImageLoader extends Component {
      * Load image from url
      * @param {?string} imageName - File name
      * @param {?(fabric.Image|string)} img - fabric.Image instance or URL of an image
+     * @param {Object} options - image options rect
+     *  @param {String} options.crossOrigin - Cross-origin value used to load the image, can be "anonymous" or "use-credentials"
      * @returns {Promise}
      */
-    load(imageName, img) {
+    load(imageName, img, options) {
         let promise;
 
         if (!imageName && !img) { // Back to the initial state, not error.
@@ -43,7 +45,7 @@ class ImageLoader extends Component {
                 resolve();
             });
         } else {
-            promise = this._setBackgroundImage(img).then(oImage => {
+            promise = this._setBackgroundImage(img, options).then(oImage => {
                 this.setCanvasImage(imageName, oImage);
                 this.adjustCanvasDimension();
 
@@ -57,10 +59,12 @@ class ImageLoader extends Component {
     /**
      * Set background image
      * @param {?(fabric.Image|String)} img fabric.Image instance or URL of an image to set background to
+     * @param {Object} options - image options rect
+     *  @param {String} options.crossOrigin - Cross-origin value used to load the image, can be "anonymous" or "use-credentials"
      * @returns {Promise}
      * @private
      */
-    _setBackgroundImage(img) {
+    _setBackgroundImage(img, options) {
         if (!img) {
             return Promise.reject(rejectMessages.loadImage);
         }
@@ -76,7 +80,7 @@ class ImageLoader extends Component {
                 } else {
                     reject(rejectMessages.loadingImageFailed);
                 }
-            }, imageOption);
+            }, options || imageOption);
         });
     }
 }

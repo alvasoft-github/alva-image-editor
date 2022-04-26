@@ -143,6 +143,10 @@ export declare interface IExportOptions {
     quality?: number;
 }
 
+export declare interface ILoadImageOptions {
+    crossOrigin?: 'anonymous' | 'use-credentials' | null;
+}
+
 export declare interface IGraphicObjectProps {
     id?: number;
     type?: string;
@@ -314,7 +318,7 @@ export declare class ImageEditor {
     public isEmptyRedoStack(): boolean;
     public isEmptyUndoStack(): boolean;
     public loadImageFromFile(imgFile: File, imageName?: string): Promise<ICropResolveObject>;
-    public loadImageFromURL(url: string, imageName?: string, silent?: boolean): Promise<ICropResolveObject>;
+    public loadImageFromURL(url: string, imageName?: string, options?: ILoadImageOptions, silent?: boolean): Promise<ICropResolveObject>;
     public redo(): Promise<any>;
     public registerIcons(infos: IIconInfo): void;
     public registerUniformlyScaledIcons(infos: IUniformScalingInfo): void;
@@ -334,7 +338,7 @@ export declare class ImageEditor {
     public setObjectPosition(id: number, posInfo?: IPositionConfig): Promise<void>;
     public setObjectProperties(id: number, keyValue?: IGraphicObjectProps): Promise<void>;
     public setObjectPropertiesQuietly(id: number, keyValue?: IGraphicObjectProps): Promise<void>;
-    public startDrawingMode(mode: string, option?: {width?: number, color?: string}): boolean;
+    public startDrawingMode(mode: string, option?: { width?: number, color?: string }): boolean;
     public stopDrawingMode(): void;
     public toDataURL(options?: IExportOptions): string;
     public toBlob(options?: IExportOptions): Promise<Blob>;
