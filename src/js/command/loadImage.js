@@ -15,9 +15,11 @@ const command = {
      * @param {Graphics} graphics - Graphics instance
      * @param {string} imageName - Image name
      * @param {string} imgUrl - Image Url
+     * @param {Object} options - image options rect
+     *  @param {String} options.crossOrigin - Cross-origin value used to load the image, can be "anonymous" or "use-credentials"
      * @returns {Promise}
      */
-    execute(graphics, imageName, imgUrl) {
+    execute(graphics, imageName, imgUrl, options) {
         const loader = graphics.getComponent(IMAGE_LOADER);
         const prevImage = loader.getCanvasImage();
         const prevImageWidth = prevImage ? prevImage.width : 0;
@@ -34,7 +36,7 @@ const command = {
             objects
         };
 
-        return loader.load(imageName, imgUrl).then(newImage => ({
+        return loader.load(imageName, imgUrl, options).then(newImage => ({
             oldWidth: prevImageWidth,
             oldHeight: prevImageHeight,
             newWidth: newImage.width,
