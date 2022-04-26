@@ -585,7 +585,7 @@ class ImageEditor {
         const imgUrl = URL.createObjectURL(imgFile);
         imageName = imageName || imgFile.name;
 
-        return this.loadImageFromURL(imgUrl, imageName, silent).then(value => {
+        return this.loadImageFromURL(imgUrl, imageName, null, silent).then(value => {
             URL.revokeObjectURL(imgFile);
 
             return value;
