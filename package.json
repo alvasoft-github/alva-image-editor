@@ -1,13 +1,13 @@
 {
     "name": "@alvasoft/alva-image-editor",
     "author": "Alvasoft",
-    "version": "5.6.11",
+    "version": "5.6.10",
     "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/alvasoft-github/alva-image-editor.git"
     },
-    "main": "alva-image-editor.js",
+    "main": "@alvasoft/alva-image-editor.min.js",
     "files": [
         "src",
         "dist",
@@ -32,16 +32,15 @@
         "test:ne": "KARMA_SERVER=ne karma start",
         "test:ex": "node exampleTest.js",
         "test:types": "tsc --project test/types",
-        "bundle": "npm run set-env &&  webpack && webpack -p",
+        "bundle": "npm run set-env && webpack -p",
         "serve": "webpack-dev-server",
         "doc:dev": "tuidoc --dev",
         "doc": "tuidoc",
         "tslint": "tslint index.d.ts",
         "preversion": "npm run test",
         "version": "npm run bundle",
-        "postversion": "git commit -am \"New version\" && git push origin --tags",
         "new-version:minor": "npm version minor",
-        "publish": "npm publish dist/@alvasoft"
+        "publish": "npm publish dist/ngx-validation"
     },
     "dependencies": {
         "core-js-pure": "^3.0.0",
