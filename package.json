@@ -7,7 +7,7 @@
         "type": "git",
         "url": "https://github.com/alvasoft-github/alva-image-editor.git"
     },
-    "main": "@alvasoft/alva-image-editor.min.js",
+    "main": "@alvasoft/alva-image-editor.js",
     "files": [
         "src",
         "dist",
@@ -32,7 +32,7 @@
         "test:ne": "KARMA_SERVER=ne karma start",
         "test:ex": "node exampleTest.js",
         "test:types": "tsc --project test/types",
-        "bundle": "npm run set-env && webpack -p",
+        "bundle": "npm run set-env && webpack && webpack -p",
         "serve": "webpack-dev-server",
         "doc:dev": "tuidoc --dev",
         "doc": "tuidoc",
