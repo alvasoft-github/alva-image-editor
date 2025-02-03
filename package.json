@@ -7,7 +7,7 @@
         "type": "git",
         "url": "https://github.com/alvasoft-github/alva-image-editor.git"
     },
-    "main": "@alvasoft/alva-image-editor.js",
+    "main": "dist/@alvasoft/alva-image-editor.js",
     "files": [
         "src",
         "dist",
