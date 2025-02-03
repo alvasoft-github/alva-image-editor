@@ -39,14 +39,13 @@
         "tslint": "tslint index.d.ts",
         "preversion": "npm run test",
         "version": "npm run bundle",
-        "postversion": "git push all && git push all --tags",
+        "postversion": "git commit -am \"New version\" && git push origin --tags",
         "new-version:minor": "npm version minor"
     },
     "dependencies": {
-        "core-js-pure": "^3.6.4",
-        "fabric": "^3.6.6",
-        "tui-code-snippet": "^1.5.0",
-        "tui-color-picker": "^2.2.0"
+        "core-js-pure": "^3.0.0",
+        "fabric": "^3.6.6-browser",
+        "tui-code-snippet": "^1.5.2"
     },
     "devDependencies": {
         "babel-core": "^6.26.3",
@@ -65,7 +64,7 @@
         "jasmine-jquery": "^2.1.1",
         "jquery": "^3.5.0",
         "jsdoc": "^3.5.4",
-        "karma": "^5.0.9",
+        "karma": "^6.0.0",
         "karma-chrome-launcher": "^2.2.0",
         "karma-coverage": "^2.0.1",
         "karma-edge-launcher": "^0.4.2",
@@ -93,7 +92,7 @@
         "tui-jsdoc-template": "^1.0.4",
         "typescript": "^3.2.2",
         "uglifyjs-webpack-plugin": "^2.2.0",
-        "webpack": "^4.41.5",
+        "webpack": "^4.0.0",
         "webpack-cli": "^3.3.10",
         "webpack-dev-server": "^3.10.1"
     }

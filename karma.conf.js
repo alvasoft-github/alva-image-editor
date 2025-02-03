@@ -88,7 +88,7 @@ function setConfig(defaultConfig, server) {
     }
 }
 
-module.exports = function(config) {
+module.exports = function (config) {
     const defaultConfig = {
         basePath: './',
         frameworks: [

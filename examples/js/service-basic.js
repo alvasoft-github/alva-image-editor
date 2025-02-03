@@ -188,7 +188,7 @@ function base64ToBlob(data) {
     var mimeString = '';
     var raw, uInt8Array, i, rawLength;
 
-    raw = data.replace(rImageType, function(header, imageType) {
+    raw = data.replace(rImageType, function (header, imageType) {
         mimeString = imageType;
 
         return '';
@@ -202,7 +202,7 @@ function base64ToBlob(data) {
         uInt8Array[i] = raw.charCodeAt(i);
     }
 
-    return new Blob([uInt8Array], {type: mimeString});
+    return new Blob([uInt8Array], { type: mimeString });
 }
 
 function resizeEditor() {
@@ -308,7 +308,7 @@ function applyOrRemoveFilter(applying, type, options, instagramFilter) {
 
     if (applying) {
         $instagramImage.addClass(instagramFilter || type);
-        imageEditor.applyFilter(type, options).then(function(result) {
+        imageEditor.applyFilter(type, options).then(function (result) {
             console.log(result);
         });
     } else {
@@ -318,10 +318,10 @@ function applyOrRemoveFilter(applying, type, options, instagramFilter) {
 
 // Attach image editor custom events
 imageEditor.on({
-    objectAdded: function(objectProps) {
+    objectAdded: function (objectProps) {
         console.info(objectProps);
     },
-    undoStackChanged: function(length) {
+    undoStackChanged: function (length) {
         if (length) {
             $btnUndo.removeClass('disabled');
         } else {
@@ -329,7 +329,7 @@ imageEditor.on({
         }
         resizeEditor();
     },
-    redoStackChanged: function(length) {
+    redoStackChanged: function (length) {
         if (length) {
             $btnRedo.removeClass('disabled');
         } else {
@@ -337,19 +337,19 @@ imageEditor.on({
         }
         resizeEditor();
     },
-    objectScaled: function(obj) {
+    objectScaled: function (obj) {
         if (obj.type === 'text') {
             $inputFontSizeRange.val(obj.fontSize);
         }
     },
-    addText: function(pos) {
+    addText: function (pos) {
         imageEditor.addText('Double Click', {
             position: pos.originPosition
-        }).then(function(objectProps) {
+        }).then(function (objectProps) {
             console.log(objectProps);
         });
     },
-    objectActivated: function(obj) {
+    objectActivated: function (obj) {
         activeObjectId = obj.id;
         if (obj.type === 'rect' || obj.type === 'circle' || obj.type === 'triangle') {
             showSubMenu('shape');
@@ -365,7 +365,7 @@ imageEditor.on({
             activateTextMode();
         }
     },
-    mousedown: function(event, originPointer) {
+    mousedown: function (event, originPointer) {
         if ($imageFilterSubMenu.is(':visible') && imageEditor.hasFilter('colorFilter')) {
             imageEditor.applyFilter('colorFilter', {
                 x: parseInt(originPointer.x, 10),
@@ -376,15 +376,15 @@ imageEditor.on({
 });
 
 // Attach button click event listeners
-$btns.on('click', function() {
+$btns.on('click', function () {
     $btnsActivatable.removeClass('active');
 });
 
-$btnsActivatable.on('click', function() {
+$btnsActivatable.on('click', function () {
     $(this).addClass('active');
 });
 
-$btnUndo.on('click', function() {
+$btnUndo.on('click', function () {
     $displayingSubMenu.hide();
 
     if (!$(this).hasClass('disabled')) {
@@ -392,7 +392,7 @@ $btnUndo.on('click', function() {
     }
 });
 
-$btnRedo.on('click', function() {
+$btnRedo.on('click', function () {
     $displayingSubMenu.hide();
 
     if (!$(this).hasClass('disabled')) {
@@ -400,93 +400,93 @@ $btnRedo.on('click', function() {
     }
 });
 
-$btnClearObjects.on('click', function() {
+$btnClearObjects.on('click', function () {
     $displayingSubMenu.hide();
     imageEditor.clearObjects();
 });
 
-$btnRemoveActiveObject.on('click', function() {
+$btnRemoveActiveObject.on('click', function () {
     $displayingSubMenu.hide();
     imageEditor.removeObject(activeObjectId);
 });
 
-$btnCrop.on('click', function() {
+$btnCrop.on('click', function () {
     imageEditor.startDrawingMode('CROPPER');
     $displayingSubMenu.hide();
     $displayingSubMenu = $cropSubMenu.show();
     imageEditor.setCropzoneRect(2.5, false, 1);
 });
 
-$btnFlip.on('click', function() {
+$btnFlip.on('click', function () {
     console.log(imageEditor.getAngle());
     imageEditor.stopDrawingMode();
     $displayingSubMenu.hide();
     $displayingSubMenu = $flipSubMenu.show();
 });
 
-$btnRotation.on('click', function() {
+$btnRotation.on('click', function () {
     $displayingSubMenu.hide();
     $displayingSubMenu = $rotationSubMenu.show();
 });
 
-$btnClose.on('click', function() {
+$btnClose.on('click', function () {
     imageEditor.stopDrawingMode();
     $displayingSubMenu.hide();
 });
 
-$btnApplyCrop.on('click', function() {
-    imageEditor.crop(imageEditor.getCropzoneRect()).then(function() {
+$btnApplyCrop.on('click', function () {
+    imageEditor.crop(imageEditor.getCropzoneRect()).then(function () {
         imageEditor.stopDrawingMode();
         resizeEditor();
     });
 });
 
-$btnCancelCrop.on('click', function() {
+$btnCancelCrop.on('click', function () {
     imageEditor.stopDrawingMode();
 });
 
-$btnFlipX.on('click', function() {
-    imageEditor.flipX().then(function(status) {
+$btnFlipX.on('click', function () {
+    imageEditor.flipX().then(function (status) {
         console.log('flipX: ', status.flipX);
         console.log('flipY: ', status.flipY);
         console.log('angle: ', status.angle);
     });
 });
 
-$btnFlipY.on('click', function() {
-    imageEditor.flipY().then(function(status) {
+$btnFlipY.on('click', function () {
+    imageEditor.flipY().then(function (status) {
         console.log('flipX: ', status.flipX);
         console.log('flipY: ', status.flipY);
         console.log('angle: ', status.angle);
     });
 });
 
-$btnResetFlip.on('click', function() {
-    imageEditor.resetFlip().then(function(status) {
+$btnResetFlip.on('click', function () {
+    imageEditor.resetFlip().then(function (status) {
         console.log('flipX: ', status.flipX);
         console.log('flipY: ', status.flipY);
         console.log('angle: ', status.angle);
     });
 });
 
-$btnRotateClockwise.on('click', function() {
+$btnRotateClockwise.on('click', function () {
     rotation = (Math.floor((rotation + 90) / 90) * 90) % 360;
     imageEditor.setAngle(rotation).then(() => {
-        imageEditor.straighten(parseInt($inputStraightenRange.val(), 10), rotation)['catch'](function() {});
+        imageEditor.straighten(parseInt($inputStraightenRange.val(), 10), rotation)['catch'](function () { });
     });
 });
 
-$btnRotateCounterClockWise.on('click', function() {
+$btnRotateCounterClockWise.on('click', function () {
     rotation = (Math.ceil((rotation - 90) / 90) * 90) % 360;
     imageEditor.setAngle(rotation).then(() => {
-        imageEditor.straighten(parseInt($inputStraightenRange.val(), 10), rotation)['catch'](function() {});
+        imageEditor.straighten(parseInt($inputStraightenRange.val(), 10), rotation)['catch'](function () { });
     });
 });
 
-$inputRotationRange.on('mousedown', function() {
-    var changeAngle = function() {
+$inputRotationRange.on('mousedown', function () {
+    var changeAngle = function () {
         rotation = parseInt($inputRotationRange.val(), 10);
-        imageEditor.setAngle(rotation)['catch'](function() {});
+        imageEditor.setAngle(rotation)['catch'](function () { });
     };
     $(document).on('mousemove', changeAngle);
     $(document).on('mouseup', function stopChangingAngle() {
@@ -495,17 +495,16 @@ $inputRotationRange.on('mousedown', function() {
     });
 });
 
-$inputRotationRange.on('change', function() {
+$inputRotationRange.on('change', function () {
     rotation = parseInt($inputRotationRange.val(), 10);
-    imageEditor.setAngle(rotation)['catch'](function() {});
+    imageEditor.setAngle(rotation)['catch'](function () { });
 });
 
-$inputStraightenRange.on('mousedown', function() {
+$inputStraightenRange.on('mousedown', function () {
     imageEditor.startDrawingMode('STRAIGHTEN');
 
-    var straighten = function() {
-        imageEditor.straighten(parseInt($inputStraightenRange.val(), 10), rotation)['catch'](function() {});
-        console.log(imageEditor.getStraightenedRect());
+    var straighten = function () {
+        imageEditor.straighten(parseInt($inputStraightenRange.val(), 10), rotation)['catch'](function () { });
     };
     $(document).on('mousemove', straighten);
     $(document).on('mouseup', function stopStraighten() {
@@ -514,19 +513,19 @@ $inputStraightenRange.on('mousedown', function() {
     });
 });
 
-$inputStraightenRange.on('mouseup', function() {
+$inputStraightenRange.on('mouseup', function () {
     imageEditor.startDrawingMode('LOCK');
 });
 
-$inputStraightenRange.on('change', function() {
-    imageEditor.straighten(parseInt($inputStraightenRange.val(), 10), rotation)['catch'](function() {});
+$inputStraightenRange.on('change', function () {
+    imageEditor.straighten(parseInt($inputStraightenRange.val(), 10), rotation)['catch'](function () { });
 });
 
-$inputBrushWidthRange.on('change', function() {
-    imageEditor.setBrush({width: parseInt(this.value, 10)});
+$inputBrushWidthRange.on('change', function () {
+    imageEditor.setBrush({ width: parseInt(this.value, 10) });
 });
 
-$inputImage.on('change', function(event) {
+$inputImage.on('change', function (event) {
     var file;
 
     if (!supportingFileAPI) {
@@ -534,13 +533,13 @@ $inputImage.on('change', function(event) {
     }
 
     file = event.target.files[0];
-    imageEditor.loadImageFromFile(file).then(function(result) {
+    imageEditor.loadImageFromFile(file).then(function (result) {
         console.log(result);
         imageEditor.clearUndoStack();
     });
 });
 
-$btnDownload.on('click', function() {
+$btnDownload.on('click', function () {
     var imageName = imageEditor.getImageName();
     imageEditor.toBlob().then(blob => {
         var type = blob.type.split('/')[1];
@@ -554,14 +553,14 @@ $btnDownload.on('click', function() {
 });
 
 // control draw line mode
-$btnDrawLine.on('click', function() {
+$btnDrawLine.on('click', function () {
     imageEditor.stopDrawingMode();
     $displayingSubMenu.hide();
     $displayingSubMenu = $drawLineSubMenu.show();
     $selectLine.eq(0).change();
 });
 
-$selectLine.on('change', function() {
+$selectLine.on('change', function () {
     var mode = $(this).val();
     var settings = getBrushSettings();
 
@@ -573,20 +572,20 @@ $selectLine.on('change', function() {
     }
 });
 
-$selectBrushType.on('change', function() {
+$selectBrushType.on('change', function () {
     imageEditor.setBrush({
         brush: this.value
     });
 });
 
-brushColorpicker.on('selectColor', function(event) {
+brushColorpicker.on('selectColor', function (event) {
     imageEditor.setBrush({
         color: hexToRGBa(event.color, 0.5)
     });
 });
 
 // control draw shape mode
-$btnDrawShape.on('click', function() {
+$btnDrawShape.on('click', function () {
     showSubMenu('shape');
 
     // step 1. get options to draw shape from toolbar
@@ -604,13 +603,13 @@ $btnDrawShape.on('click', function() {
     activateShapeMode();
 });
 
-$selectShapeType.on('change', function() {
+$selectShapeType.on('change', function () {
     shapeType = $(this).val();
 
     imageEditor.setDrawingShape(shapeType);
 });
 
-$inputCheckTransparent.on('change', function() {
+$inputCheckTransparent.on('change', function () {
     var colorType = $selectColorType.val();
     var isTransparent = $(this).prop('checked');
     var color;
@@ -634,7 +633,7 @@ $inputCheckTransparent.on('change', function() {
     imageEditor.setDrawingShape(shapeType, shapeOptions);
 });
 
-shapeColorpicker.on('selectColor', function(event) {
+shapeColorpicker.on('selectColor', function (event) {
     var colorType = $selectColorType.val();
     var isTransparent = $inputCheckTransparent.prop('checked');
     var color = event.color;
@@ -656,7 +655,7 @@ shapeColorpicker.on('selectColor', function(event) {
     imageEditor.setDrawingShape(shapeType, shapeOptions);
 });
 
-$inputStrokeWidthRange.on('change', function() {
+$inputStrokeWidthRange.on('change', function () {
     var strokeWidth = Number($(this).val());
 
     imageEditor.changeShape(activeObjectId, {
@@ -667,18 +666,18 @@ $inputStrokeWidthRange.on('change', function() {
 });
 
 // control text mode
-$btnText.on('click', function() {
+$btnText.on('click', function () {
     showSubMenu('text');
     activateTextMode();
 });
 
-$inputFontSizeRange.on('change', function() {
+$inputFontSizeRange.on('change', function () {
     imageEditor.changeTextStyle(activeObjectId, {
         fontSize: parseInt(this.value, 10)
     });
 });
 
-$btnTextStyle.on('click', function(e) { // eslint-disable-line
+$btnTextStyle.on('click', function (e) { // eslint-disable-line
     var styleType = $(this).attr('data-style-type');
     var styleObj;
 
@@ -686,22 +685,22 @@ $btnTextStyle.on('click', function(e) { // eslint-disable-line
 
     switch (styleType) {
         case 'b':
-            styleObj = {fontWeight: 'bold'};
+            styleObj = { fontWeight: 'bold' };
             break;
         case 'i':
-            styleObj = {fontStyle: 'italic'};
+            styleObj = { fontStyle: 'italic' };
             break;
         case 'u':
-            styleObj = {underline: true};
+            styleObj = { underline: true };
             break;
         case 'l':
-            styleObj = {textAlign: 'left'};
+            styleObj = { textAlign: 'left' };
             break;
         case 'c':
-            styleObj = {textAlign: 'center'};
+            styleObj = { textAlign: 'center' };
             break;
         case 'r':
-            styleObj = {textAlign: 'right'};
+            styleObj = { textAlign: 'right' };
             break;
         default:
             styleObj = {};
@@ -710,14 +709,14 @@ $btnTextStyle.on('click', function(e) { // eslint-disable-line
     imageEditor.changeTextStyle(activeObjectId, styleObj);
 });
 
-textColorpicker.on('selectColor', function(event) {
+textColorpicker.on('selectColor', function (event) {
     imageEditor.changeTextStyle(activeObjectId, {
         'fill': event.color
     });
 });
 
 // control icon
-$btnAddIcon.on('click', function() {
+$btnAddIcon.on('click', function () {
     showSubMenu('icon');
     activateIconMode();
 });
@@ -725,19 +724,19 @@ $btnAddIcon.on('click', function() {
 function onClickIconSubMenu(event) {
     var element = event.target || event.srcElement;
     var iconType = $(element).attr('data-icon-type');
-    imageEditor.registerUniformlyScaledIcons({'cancel': true});
+    imageEditor.registerUniformlyScaledIcons({ 'cancel': true });
 
-    imageEditor.once('mousedown', function(e, originPointer) {
+    imageEditor.once('mousedown', function (e, originPointer) {
         imageEditor.addIcon(iconType, {
             left: originPointer.x,
             top: originPointer.y
-        }).then(function(objectProps) {
+        }).then(function (objectProps) {
             // console.log(objectProps);
         });
     });
 }
 
-$btnRegisterIcon.on('click', function() {
+$btnRegisterIcon.on('click', function () {
     $iconSubMenu.find('.menu-item').eq(3).after(
         '<li id="customArrow" class="menu-item icon-text" data-icon-type="customArrow">↑</li>'
     );
@@ -753,19 +752,19 @@ $btnRegisterIcon.on('click', function() {
 
 $iconSubMenu.on('click', '.icon-text', onClickIconSubMenu);
 
-iconColorpicker.on('selectColor', function(event) {
+iconColorpicker.on('selectColor', function (event) {
     imageEditor.changeIconColor(activeObjectId, event.color);
 });
 
 // control mask filter
-$btnMaskFilter.on('click', function() {
+$btnMaskFilter.on('click', function () {
     imageEditor.stopDrawingMode();
     $displayingSubMenu.hide();
 
     $displayingSubMenu = $filterSubMenu.show();
 });
 
-$btnImageFilter.on('click', function() {
+$btnImageFilter.on('click', function () {
     var filters = {
         'grayscale': $inputCheckGrayscale,
         'invert': $inputCheckInvert,
@@ -783,7 +782,7 @@ $btnImageFilter.on('click', function() {
         'colorFilter': $inputCheckColorFilter
     };
 
-    tui.util.forEach(filters, function($value, key) {
+    tui.util.forEach(filters, function ($value, key) {
         $value.prop('checked', imageEditor.hasFilter(key));
     });
     $displayingSubMenu.hide();
@@ -791,7 +790,7 @@ $btnImageFilter.on('click', function() {
     $displayingSubMenu = $imageFilterSubMenu.show();
 });
 
-$btnLoadMaskImage.on('change', function() {
+$btnLoadMaskImage.on('change', function () {
     var file;
     var imgUrl;
 
@@ -804,8 +803,8 @@ $btnLoadMaskImage.on('change', function() {
     if (file) {
         imgUrl = URL.createObjectURL(file);
 
-        imageEditor.loadImageFromURL(imageEditor.toDataURL(), 'FilterImage').then(function() {
-            imageEditor.addImageObject(imgUrl).then(function(objectProps) {
+        imageEditor.loadImageFromURL(imageEditor.toDataURL(), 'FilterImage').then(function () {
+            imageEditor.addImageObject(imgUrl).then(function (objectProps) {
                 URL.revokeObjectURL(file);
                 console.log(objectProps);
             });
@@ -813,211 +812,211 @@ $btnLoadMaskImage.on('change', function() {
     }
 });
 
-$btnApplyMask.on('click', function() {
+$btnApplyMask.on('click', function () {
     imageEditor.applyFilter('mask', {
         maskObjId: activeObjectId
-    }).then(function(result) {
+    }).then(function (result) {
         console.log(result);
     });
 });
 
-$inputCheckGrayscale.on('change', function() {
+$inputCheckGrayscale.on('change', function () {
     applyOrRemoveFilter(this.checked, 'Grayscale', null);
 });
 
-$inputCheckInvert.on('change', function() {
+$inputCheckInvert.on('change', function () {
     applyOrRemoveFilter(this.checked, 'Invert', null);
 });
 
-$inputCheckSepia.on('change', function() {
+$inputCheckSepia.on('change', function () {
     applyOrRemoveFilter(this.checked, 'Sepia', null);
 });
 
-$inputCheckBlur.on('change', function() {
+$inputCheckBlur.on('change', function () {
     applyOrRemoveFilter(this.checked, 'Blur', {
         blur: 1 / 9
     });
 });
 
-$inputCheckSharpen.on('change', function() {
+$inputCheckSharpen.on('change', function () {
     applyOrRemoveFilter(this.checked, 'Sharpen', null);
 });
 
-$inputCheckEmboss.on('change', function() {
+$inputCheckEmboss.on('change', function () {
     applyOrRemoveFilter(this.checked, 'Emboss', null);
 });
 
-$inputCheckRemoveWhite.on('change', function() {
+$inputCheckRemoveWhite.on('change', function () {
     applyOrRemoveFilter(this.checked, 'removeWhite', {
         threshold: parseInt($inputRangeRemoveWhiteThreshold.val(), 10),
         distance: parseInt($inputRangeRemoveWhiteDistance.val(), 10)
     });
 });
 
-$inputRangeRemoveWhiteThreshold.on('change', function() {
+$inputRangeRemoveWhiteThreshold.on('change', function () {
     applyOrRemoveFilter($inputCheckRemoveWhite.is(':checked'), 'removeWhite', {
         threshold: parseInt(this.value, 10)
     });
 });
 
-$inputRangeRemoveWhiteDistance.on('change', function() {
+$inputRangeRemoveWhiteDistance.on('change', function () {
     applyOrRemoveFilter($inputCheckRemoveWhite.is(':checked'), 'removeWhite', {
         distance: parseInt(this.value, 10)
     });
 });
 
-$inputCheckBrightness.on('change', function() {
+$inputCheckBrightness.on('change', function () {
     applyOrRemoveFilter(this.checked, 'brightness', {
         brightness: parseInt($inputRangeBrightnessValue.val(), 10) / 255
     });
 });
 
-$inputRangeBrightnessValue.on('change', function() {
+$inputRangeBrightnessValue.on('change', function () {
     applyOrRemoveFilter($inputCheckBrightness.is(':checked'), 'brightness', {
         brightness: parseInt(this.value, 10) / 255
     });
 });
 
-$inputCheckNoise.on('change', function() {
+$inputCheckNoise.on('change', function () {
     applyOrRemoveFilter(this.checked, 'noise', {
         noise: parseInt($inputRangeNoiseValue.val(), 10)
     });
 });
 
-$inputRangeNoiseValue.on('change', function() {
+$inputRangeNoiseValue.on('change', function () {
     applyOrRemoveFilter($inputCheckNoise.is(':checked'), 'noise', {
         noise: parseInt(this.value, 10)
     });
 });
 
-$inputCheckPixelate.on('change', function() {
+$inputCheckPixelate.on('change', function () {
     applyOrRemoveFilter(this.checked, 'pixelate', {
         blocksize: parseInt($inputRangePixelateValue.val(), 10)
     });
 });
 
-$inputRangePixelateValue.on('change', function() {
+$inputRangePixelateValue.on('change', function () {
     applyOrRemoveFilter($inputCheckPixelate.is(':checked'), 'pixelate', {
         blocksize: parseInt(this.value, 10)
     });
 });
 
-$inputCheck1977.on('change', function() {
+$inputCheck1977.on('change', function () {
     applyOrRemoveFilter(this.checked, 'f1977', null, '_1977');
 });
 
-$inputCheckAmaro.on('change', function() {
+$inputCheckAmaro.on('change', function () {
     applyOrRemoveFilter(this.checked, 'amaro');
 });
 
-$inputCheckBrooklyn.on('change', function() {
+$inputCheckBrooklyn.on('change', function () {
     applyOrRemoveFilter(this.checked, 'brooklyn');
 });
 
-$inputCheckClarendon.on('change', function() {
+$inputCheckClarendon.on('change', function () {
     applyOrRemoveFilter(this.checked, 'clarendon');
 });
 
-$inputCheckGingham.on('change', function() {
+$inputCheckGingham.on('change', function () {
     applyOrRemoveFilter(this.checked, 'gingham');
 });
 
-$inputCheckInkwell.on('change', function() {
+$inputCheckInkwell.on('change', function () {
     applyOrRemoveFilter(this.checked, 'inkwell');
 });
 
-$inputCheckKelvin.on('change', function() {
+$inputCheckKelvin.on('change', function () {
     applyOrRemoveFilter(this.checked, 'kelvin');
 });
 
-$inputCheckLark.on('change', function() {
+$inputCheckLark.on('change', function () {
     applyOrRemoveFilter(this.checked, 'lark');
 });
 
-$inputCheckLofi.on('change', function() {
+$inputCheckLofi.on('change', function () {
     applyOrRemoveFilter(this.checked, 'lofi');
 });
 
-$inputCheckMoon.on('change', function() {
+$inputCheckMoon.on('change', function () {
     applyOrRemoveFilter(this.checked, 'moon');
 });
 
-$inputCheckNashville.on('change', function() {
+$inputCheckNashville.on('change', function () {
     applyOrRemoveFilter(this.checked, 'nashville');
 });
 
-$inputCheckPerpetua.on('change', function() {
+$inputCheckPerpetua.on('change', function () {
     applyOrRemoveFilter(this.checked, 'perpetua');
 });
 
-$inputCheckToaster.on('change', function() {
+$inputCheckToaster.on('change', function () {
     applyOrRemoveFilter(this.checked, 'toaster');
 });
 
-$inputCheckWalden.on('change', function() {
+$inputCheckWalden.on('change', function () {
     applyOrRemoveFilter(this.checked, 'walden');
 });
 
-$inputCheckTint.on('change', function() {
+$inputCheckTint.on('change', function () {
     applyOrRemoveFilter(this.checked, 'tint', {
         color: tintColorpicker.getColor(),
         alpha: parseFloat($inputRangeTintOpacityValue.val())
     });
 });
 
-tintColorpicker.on('selectColor', function(e) {
+tintColorpicker.on('selectColor', function (e) {
     applyOrRemoveFilter($inputCheckTint.is(':checked'), 'tint', {
         color: e.color,
         alpha: parseFloat($inputRangeTintOpacityValue.val())
     });
 });
 
-$inputRangeTintOpacityValue.on('change', function() {
+$inputRangeTintOpacityValue.on('change', function () {
     applyOrRemoveFilter($inputCheckTint.is(':checked'), 'tint', {
         color: tintColorpicker.getColor(),
         alpha: parseFloat($inputRangeTintOpacityValue.val())
     });
 });
 
-$inputCheckMultiply.on('change', function() {
+$inputCheckMultiply.on('change', function () {
     applyOrRemoveFilter(this.checked, 'multiply', {
         color: multiplyColorpicker.getColor()
     });
 });
 
-multiplyColorpicker.on('selectColor', function() {
+multiplyColorpicker.on('selectColor', function () {
     applyOrRemoveFilter($inputCheckMultiply.is(':checked'), 'multiply', {
         color: e.color
     });
 });
 
-$inputCheckBlend.on('change', function() {
+$inputCheckBlend.on('change', function () {
     applyOrRemoveFilter(this.checked, 'blendColor', {
         color: blendColorpicker.getColor(),
         mode: $selectBlendType.val()
     });
 });
 
-blendColorpicker.on('selectColor', function(e) {
+blendColorpicker.on('selectColor', function (e) {
     applyOrRemoveFilter($inputCheckBlend.is(':checked'), 'blendColor', {
         color: e.color
     });
 });
 
-$selectBlendType.on('change', function() {
+$selectBlendType.on('change', function () {
     applyOrRemoveFilter($inputCheckBlend.is(':checked'), 'blendColor', {
         mode: this.value
     });
 });
 
-$inputCheckColorFilter.on('change', function() {
+$inputCheckColorFilter.on('change', function () {
     applyOrRemoveFilter(this.checked, 'colorFilter', {
         color: '#FFFFFF',
         threshold: $inputRangeColorFilterValue.val()
     });
 });
 
-$inputRangeColorFilterValue.on('change', function() {
+$inputRangeColorFilterValue.on('change', function () {
     applyOrRemoveFilter($inputCheckColorFilter.is(':checked'), 'colorFilter', {
         threshold: this.value
     });
@@ -1033,6 +1032,6 @@ $inputRangeColorFilterValue.on('change', function() {
 
 
 // IE9 Unselectable
-$('.menu').on('selectstart', function() {
+$('.menu').on('selectstart', function () {
     return false;
 });
