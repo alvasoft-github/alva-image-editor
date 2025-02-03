@@ -7,7 +7,7 @@
         "type": "git",
         "url": "https://github.com/alvasoft-github/alva-image-editor.git"
     },
-    "main": "dist/@alvasoft/alva-image-editor.js",
+    "main": "alva-image-editor.js",
     "files": [
         "src",
         "dist",
@@ -40,7 +40,8 @@
         "preversion": "npm run test",
         "version": "npm run bundle",
         "postversion": "git commit -am \"New version\" && git push origin --tags",
-        "new-version:minor": "npm version minor"
+        "new-version:minor": "npm version minor",
+        "publish": "npm publish dist/@alvasoft"
     },
     "dependencies": {
         "core-js-pure": "^3.0.0",
